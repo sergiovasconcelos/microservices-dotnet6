@@ -56,6 +56,28 @@ public class CalculatorController : ControllerBase
         return BadRequest("Invalid Input");
     }
 
+    [HttpGet("med/{firstNumber}/{secondNumber}")]
+    public IActionResult Med(string firstNumber, string secondNumber)
+    {
+        if(IsNumeric(firstNumber) && IsNumeric(secondNumber))
+        {
+            var sum = (ConvertToDecimal(firstNumber) + ConvertToDecimal(secondNumber)) / 2;
+            return Ok(sum.ToString());
+        }
+        return BadRequest("Invalid Input");
+    }
+
+    [HttpGet("squ/{firstNumber}")]
+    public IActionResult Squ(string firstNumber)
+    {
+        if(IsNumeric(firstNumber))
+        {
+            var squ = Math.Sqrt((double)ConvertToDecimal(firstNumber));
+            return Ok(squ.ToString());
+        }
+        return BadRequest("Invalid Input");
+    }
+
     private decimal ConvertToDecimal(string strNumber)
     {
         decimal decimalValue;
